@@ -32,9 +32,28 @@ document.querySelectorAll('input[type="text"]').forEach(input => {
   });
 });
 
-form.addEventListener('submit', e => {
+form.addEventListener("submit", e => {
   e.preventDefault();
-  const data = Array.from(form.querySelectorAll('input')).map(i => i.value);
-  console.log("Submitted:", data);
-  alert("Thank you sweetheartt! 💌 Operation Impress You begins.");
+
+  const answers = Array.from(form.querySelectorAll('input')).map(i => i.value);
+
+  fetch("YOUR_GOOGLE_APPS_SCRIPT_URL_HERE", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ answers })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === "success") {
+      alert("Thanks sweetheart 💌 Your answers were saved!");
+      form.reset();
+    } else {
+      alert("Oops! Something went wrong. 😕");
+    }
+  })
+  .catch(() => {
+    alert("Request failed. Check internet or CORS settings.");
+  });
 });
