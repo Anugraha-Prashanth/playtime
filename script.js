@@ -2,8 +2,7 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const message = document.getElementById("message");
 const nextBtn = document.getElementById("nextBtn");
-const nextSection = document.getElementById("nextSection");
-const form = document.getElementById("impressForm");
+const googleForm = document.getElementById("googleForm");
 
 noBtn.addEventListener("mouseover", () => {
   const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -18,42 +17,6 @@ yesBtn.addEventListener("click", () => {
 });
 
 nextBtn.addEventListener("click", () => {
-  nextSection.style.display = "block";
+  googleForm.style.display = "block";
   nextBtn.style.display = "none";
-});
-document.querySelectorAll('input[type="text"]').forEach(input => {
-  input.addEventListener('input', () => {
-    const flower = document.createElement('div');
-    flower.className = 'flower';
-    flower.style.left = `${Math.random() * window.innerWidth}px`;
-    flower.style.bottom = `0px`;
-    document.body.appendChild(flower);
-    setTimeout(() => flower.remove(), 2000);
-  });
-});
-
-form.addEventListener("submit", e => {
-  e.preventDefault();
-
-  const answers = Array.from(form.querySelectorAll('input')).map(i => i.value);
-
-  fetch("https://script.google.com/macros/s/AKfycbxJ-FLRY1PXGw20N6_34JNqjusc-AiX41k46sSaaEvobyWVMH0UkXDicRpC9XpoU527fw/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ answers })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.status === "success") {
-      alert("Thanks sweetheart 💌 Your answers were saved!");
-      form.reset();
-    } else {
-      alert("Oops! Something went wrong. 😕");
-    }
-  })
-  .catch(() => {
-    alert("Request failed. Check internet or CORS settings.");
-  });
 });
