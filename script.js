@@ -37,7 +37,7 @@ form.addEventListener("submit", e => {
 
   const answers = Array.from(form.querySelectorAll('input')).map(i => i.value);
 
-  fetch("YOUR_GOOGLE_APPS_SCRIPT_URL_HERE", {
+  fetch("https://script.google.com/macros/s/AKfycbxJ-FLRY1PXGw20N6_34JNqjusc-AiX41k46sSaaEvobyWVMH0UkXDicRpC9XpoU527fw/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
